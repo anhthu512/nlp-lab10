@@ -4,52 +4,13 @@ Cài đặt và thực nghiệm Extractive Question Answering trên SQuAD 1.1 b�
 
 Hai notebook đã được chạy và lưu output. Các bảng, biểu đồ, CSV, log dự đoán và checkpoint trong thư mục là kết quả của lượt chạy ngày **23/11/2026**.
 
-## 1. Cấu trúc thư mục
-
-```text
-lab10/
-├── README.md
-├── tokenizer_alignment.ipynb
-├── qa_model.py
-├── qa_finetuning.ipynb
-├── document_qa.py
-├── results.csv
-├── learning_curves.png
-├── em_f1_analysis.png
-├── answer_length_analysis.png
-├── checkpoint/
-│   ├── backbone/
-│   ├── tokenizer/
-│   ├── qa_head.pt
-│   └── metadata.json
-└── outputs/
-    ├── reproducibility.json
-    ├── split_ids.json
-    ├── training_history.csv
-    ├── training_steps.csv
-    ├── context_length_results.csv
-    ├── context_length_history.csv
-    ├── em_f1_comparison.csv
-    ├── matching_analysis.csv
-    ├── answer_length_metrics.csv
-    ├── error_counts.csv
-    ├── boundary_totals.csv
-    ├── partial_match_examples.csv
-    ├── wrong_start_examples.csv
-    ├── wrong_end_examples.csv
-    ├── wrong_span_examples.csv
-    └── ...
-```
-
-| Thành phần | Chức năng |
+## 1.| Thành phần | Chức năng |
 | --- | --- |
 | [tokenizer_alignment.ipynb](tokenizer_alignment.ipynb) | Kiểm tra cấu trúc SQuAD, tokenizer, offset mapping và bốn trường hợp biên của alignment; gồm 9 cell code. |
 | [qa_model.py](qa_model.py) | Baseline, mô hình QA, alignment, normalization, EM/F1, constrained decoding, huấn luyện, đánh giá và lưu/nạp checkpoint. |
 | [qa_finetuning.ipynb](qa_finetuning.ipynb) | Chuẩn bị dữ liệu, chạy năm thí nghiệm, xuất bảng/biểu đồ, thống kê lỗi và đánh giá test; gồm 12 cell code. |
 | [document_qa.py](document_qa.py) | Nạp checkpoint đã fine-tune, chạy demo và nhận câu hỏi từ terminal. |
 | [results.csv](results.csv) | Tổng hợp 19 dòng kết quả của lượt chạy đã lưu. |
-| `checkpoint/` | Backbone, tokenizer, QA head và metadata của checkpoint được chọn. |
-| `outputs/` | CSV chi tiết, log JSONL, cấu hình và ID của các tập dữ liệu. |
 
 ## 2. Cài đặt môi trường
 
@@ -148,39 +109,7 @@ Notebook huấn luyện thực hiện **bốn lượt fine-tune độc lập**: 
 
 Lưu notebook sau khi chạy để giữ bảng, log và biểu đồ trong các cell. Chạy lại notebook sẽ ghi đè các file output cùng tên; nên sao lưu kết quả nếu muốn giữ nhiều cấu hình thí nghiệm.
 
-Các phần tính toán tay, prediction trước thí nghiệm, nhận xét kết quả, Individual Learning Check và reflection do người học tự hoàn thiện trong bài nộp.
-
 ## 4. Cấu hình và tái lập
-
-Các giá trị sau được đối chiếu với [outputs/reproducibility.json](outputs/reproducibility.json):
-
-| Tham số | Giá trị đã chạy |
-| --- | --- |
-| Model và tokenizer | `distilbert/distilbert-base-uncased` |
-| Model revision đã ghi nhận | `12040accade4e8a0f71eabdb258fecc2e7e948be` |
-| Dataset | `rajpurkar/squad`, SQuAD 1.1 |
-| Train / validation / test | 2.000 / 1.000 / 500 examples |
-| Max sequence length của mô hình chính | 384 |
-| Stride của mô hình chính | 128 |
-| Stride của Experiment 1 | 32 |
-| Giới hạn question | 48 subword tokens |
-| Giới hạn answer khi decode | 64 subword tokens |
-| Batch size | 8 |
-| Learning rate | `3e-5` |
-| Epochs cho mỗi lượt fine-tune | 2 |
-| Optimizer | AdamW |
-| Weight decay | 0,01 |
-| Gradient clipping | 1,0 |
-| Random seed | 42 |
-| Hardware | NVIDIA GeForce RTX 3050 Laptop GPU, 4 GB |
-| Python | 3.10.11 |
-| PyTorch | `2.6.0+cu124` |
-| Transformers / Datasets | `4.57.1` / `4.4.1` |
-| NumPy / pandas / Matplotlib | `1.26.4` / `2.2.3` / `3.9.4` |
-| Chọn checkpoint | Validation F1 cao nhất; giữ epoch sớm hơn nếu bằng nhau |
-| Best epoch của mô hình chính | 2 |
-| Thời gian huấn luyện mô hình chính | 173,66 giây |
-| Wall time của lượt huấn luyện chính | 206,26 giây |
 
 ### Cách chia dữ liệu
 
@@ -332,7 +261,7 @@ Mô hình được fine-tune trên SQuAD 1.1 tiếng Anh và luôn cố chọn m
 
 ### What was generated
 
-AI hỗ trợ tạo mã nguồn cho notebook và các module: baseline, character/token alignment, mô hình QA, loss, normalization, EM/F1, decoding, vòng lặp huấn luyện, các thí nghiệm, biểu đồ, xuất log/CSV và ứng dụng Document QA. README này cũng được biên soạn với hỗ trợ AI dựa trên mã nguồn và các file kết quả đã lưu.
+AI hỗ trợ tạo mã nguồn cho notebook và các module: baseline, character/token alignment, mô hình QA, loss, normalization, EM/F1, decoding, vòng lặp huấn luyện, các thí nghiệm, biểu đồ, xuất log/CSV và ứng dụng Document QA. 
 
 ### What was modified
 
@@ -340,4 +269,4 @@ Cấu hình thí nghiệm context length được đặt chung stride 32 để c
 
 ### What was verified
 
-Các bước kiểm chứng mã nguồn, thực thi notebook, checkpoint và file đầu ra được liệt kê tại mục 9. Bảng số liệu trong README được đối chiếu với CSV và metadata của lượt chạy đã lưu. Nội dung tính toán tay, dự đoán trước thực nghiệm, giải thích kết quả và reflection do người học tự viết.
+Các bước kiểm chứng mã nguồn, thực thi notebook, checkpoint và file đầu ra được liệt kê tại mục 9. Bảng số liệu trong README được đối chiếu với CSV và metadata của lượt chạy đã lưu.
