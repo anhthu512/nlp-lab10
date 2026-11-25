@@ -1,0 +1,20 @@
+experiment,split,model,max_length,stride,EM,F1,n,training_seconds,wall_seconds,best_epoch,train_windows,epoch,step,training_loss,validation_loss,epoch_training_seconds,group,threshold,error_type,count,#wrong_start_including_wrong_span,#wrong_end_including_wrong_span,#wrong_span,#EM_correct_boundary_differs,test_loss,seed
+1_context_length,validation,Transformer,128.0,32.0,46.7,57.17003698120566,1000.0,128.87569729999996,153.3258581,2.0,4101.0,,,,,,,,,,,,,,,42
+1_context_length,validation,Transformer,256.0,32.0,49.2,60.61592505479676,1000.0,121.22708379999949,143.48605969999971,2.0,2200.0,,,,,,,,,,,,,,,42
+1_context_length,validation,Transformer,384.0,32.0,45.5,58.52261066189229,1000.0,169.6977182999999,201.57481170000028,2.0,2015.0,,,,,,,,,,,,,,,42
+2_training_epoch,validation,Transformer,384.0,128.0,41.0,54.18858758558196,1000.0,87.11927289999949,,,,1.0,252.0,3.53906510699363,2.3471699896759874,87.11927289999949,,,,,,,,,,42
+2_training_epoch,validation,Transformer,384.0,128.0,47.6,59.218090565569646,1000.0,173.6567800999992,,,,2.0,504.0,1.7037855365446635,2.1141666028443282,86.53750719999971,,,,,,,,,,42
+3_em_f1,validation,Baseline,,,0.1,19.2608659176842,1000.0,,,,,,,,,,,,,,,,,,,42
+3_em_f1,validation,Fine-tuned Transformer,,,47.6,59.218090565569646,1000.0,,,,,,,,,,,,,,,,,,,42
+4_matching,validation,Transformer,,,55.687203791469194,66.30945432115394,422.0,,,,,,,,,,high_overlap,0.75,,,,,,,,42
+4_matching,validation,Transformer,,,41.69550173010381,54.040658896267814,578.0,,,,,,,,,,low_overlap,0.75,,,,,,,,42
+5_answer_length,validation,Transformer,,,50.46296296296296,59.26550244321176,216.0,,,,,,,,,,1,,,,,,,,,42
+5_answer_length,validation,Transformer,,,55.932203389830505,64.29169143157087,354.0,,,,,,,,,,2-3,,,,,,,,,42
+5_answer_length,validation,Transformer,,,50.0,63.89583902197127,266.0,,,,,,,,,,4-6,,,,,,,,,42
+5_answer_length,validation,Transformer,,,21.951219512195124,40.61701275131426,164.0,,,,,,,,,,7+,,,,,,,,,42
+error_counts,validation,Transformer,,,,,,,,,,,,,,,,,wrong_start,110.0,,,,,,42
+error_counts,validation,Transformer,,,,,,,,,,,,,,,,,wrong_end,89.0,,,,,,42
+error_counts,validation,Transformer,,,,,,,,,,,,,,,,,wrong_span,347.0,,,,,,42
+boundary_totals,validation,Transformer,,,,,,,,,,,,,,,,,,,457.0,436.0,347.0,22.0,,42
+held_out_test,test,Transformer,,,51.4,62.65830567899354,500.0,,,,,,,,,,,,,,,,,,2.1216604770758214,42
+held_out_test,test,Baseline,,,0.4,19.737774930357048,500.0,,,,,,,,,,,,,,,,,,,42
